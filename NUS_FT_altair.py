@@ -13,7 +13,7 @@ def _():
     import pandas as pd
     from pypdf import PdfWriter
     import io, base64
-    return alt, base64, io, mo, np, pd
+    return alt, mo, np, pd
 
 
 @app.cell
@@ -29,41 +29,38 @@ def _(mo):
         value="Uniform Sampling",
         label="**Sampling**"
     )
-    save_btn = mo.ui.run_button(label="Save PDF")
+    #save_btn = mo.ui.run_button(label="Save PDF")
     #mo.vstack([f0, phi, logR, seed, mode])
     # 
 
-    return f0, logR, mode, noise, phi, samp, save_btn, seed
+    return f0, logR, mode, noise, phi, samp, seed
 
 
 @app.cell
-def _(base64, chart, io, mo, save_btn):
-    html = ''
-    if save_btn.value:   # True after click
-        chart.save("charts.pdf")
-        buf = io.BytesIO()
-        chart.save(buf, format="pdf")
-        pdf_b64 = base64.b64encode(buf.getvalue()).decode("ascii")
+def _():
+    # html = ''
+    # if save_btn.value:   # True after click
+    #     chart.save("charts.pdf")
+    #     buf = io.BytesIO()
+    #     chart.save(buf, format="pdf")
+    #     pdf_b64 = base64.b64encode(buf.getvalue()).decode("ascii")
 
-        html = f'''
-        <a download="charts.pdf"
-           href="data:application/pdf;base64,{pdf_b64}">
-           ⬇️ Download
-        </a>
-        '''
+    #     html = f'''
+    #     <a download="charts.pdf"
+    #        href="data:application/pdf;base64,{pdf_b64}">
+    #        ⬇️ Download
+    #     </a>
+    #     '''
 
 
-        # marimo 0.14 has mo.md; it renders HTML links fine
-        mo.md(html)
-        #mo.ui.download.from_path("charts.pdf", label="Download PDF")  # if available in your marimo version
-    return (html,)
+    #     # marimo 0.14 has mo.md; it renders HTML links fine
+    #     mo.md(html)
+    #     #mo.ui.download.from_path("charts.pdf", label="Download PDF")  # if available in your marimo version
+    return
 
 
 @app.cell
-def _(R, f0, html, logR, mo, mode, noise, phi, samp, save_btn, seed):
-
-
-
+def _(R, f0, logR, mo, mode, noise, phi, samp, seed):
     mo.md(
         f"""
     **Controls** \
@@ -75,8 +72,7 @@ def _(R, f0, html, logR, mo, mode, noise, phi, samp, save_btn, seed):
             \n {seed} $s$ = **{seed.value:.4g}** [Random Seed] \
             \n {mode} \
             \n \
-            \n {save_btn}
-    """ + html
+    """
     )
     return
 
@@ -205,56 +201,6 @@ def _(X, alt, freqs, fs, mode, n_zf, np, pd, x_win):
     chart = ( chart_ri & chart_fft)
 
     return (chart,)
-
-
-@app.cell
-def _():
-    return
-
-
-@app.cell
-def _():
-    return
-
-
-@app.cell
-def _():
-    return
-
-
-@app.cell
-def _():
-    return
-
-
-@app.cell
-def _():
-    return
-
-
-@app.cell
-def _():
-    return
-
-
-@app.cell
-def _():
-    return
-
-
-@app.cell
-def _():
-    return
-
-
-@app.cell
-def _():
-    return
-
-
-@app.cell
-def _():
-    return
 
 
 if __name__ == "__main__":
