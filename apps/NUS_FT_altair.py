@@ -29,10 +29,7 @@ def _(mo):
         value="Uniform Sampling",
         label="**Sampling**"
     )
-    #save_btn = mo.ui.run_button(label="Save PDF")
-    #mo.vstack([f0, phi, logR, seed, mode])
-    # 
-
+    
     return f0, logR, mode, noise, phi, samp, seed
 
 
